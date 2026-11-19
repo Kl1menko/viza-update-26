@@ -1,0 +1,322 @@
+@use '../helpers' as *;
+
+// Вакансії по країнах (сторінки країн + карусель "Opened work in" на головній)
+
+.vacancies.m-jobs {
+  margin-top: 0;
+}
+
+.c-job-program {
+  margin-top: 24px;
+}
+
+// Термін документів + головна перевага країни
+.c-country-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 16px;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--color-grey-20);
+    color: var(--text-color-btn-secondary);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+
+    &.m-accent {
+      background: #fff4d1;
+    }
+  }
+
+  &__label {
+    color: var(--color-grey-30);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-transform: uppercase;
+  }
+}
+
+.c-job-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  // у каруселі — 2 колонки на ПК
+  &.m-compact {
+    @include tablet-above {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+.c-job {
+  padding: 20px;
+  border: 1px solid rgba(37, 40, 44, 0.1);
+  border-radius: 16px;
+  background: #fff;
+
+  &.m-compact {
+    padding: 16px;
+  }
+
+  // іконка завжди вирівняна по верху тексту — однаково в усіх картках,
+  // незалежно від того, в скільки рядків назва
+  &__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+
+  &__titles {
+    min-width: 0;
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--text-color-btn-secondary);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+
+    .m-compact & {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  &__salary {
+    margin: 2px 0 0;
+    color: var(--color-green);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
+
+  &__text {
+    margin: 12px 0 0;
+    color: var(--color-grey-40);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__chip {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--color-grey-20);
+    color: var(--text-color-btn-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+
+    .m-compact & {
+      font-size: 13px;
+      line-height: 17px;
+    }
+  }
+
+  &__chip-label {
+    color: var(--color-grey-30);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+
+  // додаткові переваги
+  &__perks {
+    position: relative;
+    // фон по ширині тексту, а не на всю картку
+    width: fit-content;
+    max-width: 100%;
+    margin: 12px 0 0;
+    padding: 10px 12px 10px 34px;
+    border-radius: 10px;
+    background: var(--color-green-10);
+    color: var(--color-green);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+
+    // галочка по центру першого рядка: верхній відступ (10px) + половина line-height (10px);
+    // translate(-70%) — оптичний центр галочки (її "вага" внизу)
+    &::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 13px;
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: translateY(-70%) rotate(-45deg);
+    }
+  }
+}
+
+// Компактна картка в каруселі: графік і житло — короткими рядками без плашок
+.c-job.m-compact {
+  .c-job__meta {
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 10px;
+  }
+
+  .c-job__chip {
+    display: block;
+    padding: 0;
+    background: none;
+    color: var(--color-grey-40);
+  }
+
+  .c-job__chip-label {
+    display: inline;
+    margin-right: 4px;
+    font-size: 13px;
+    text-transform: none;
+
+    &::after {
+      content: ':';
+    }
+  }
+}
+
+// Кнопка "See all N vacancies" під вакансіями в каруселі
+.c-country-more {
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 16px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+// Телефон: у каруселі показуємо до 2 вакансій на програму, решта — на сторінці країни
+@include mobile {
+  .c-job-list.m-compact > .c-job:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+// Телефон: кнопки країн гортаються вбік — показуємо це затуханням праворуч
+@include mobile {
+  [data-component="QuickFilter"] .c-quick-filters__list {
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+    padding-right: 32px;
+  }
+}
+
+// Сторінка країни (повна картка): Schedule / Accommodation — у правій колонці
+// поруч із назвою та описом, щоб картка була коротшою. На телефоні — під описом, як раніше.
+@include mobile-above {
+  .c-job:not(.m-compact) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    grid-template-areas:
+      "head meta"
+      "text meta"
+      "perks meta";
+    grid-template-rows: auto auto 1fr;
+    column-gap: 20px;
+
+    .c-job__head { grid-area: head; }
+    .c-job__text { grid-area: text; }
+    .c-job__perks { grid-area: perks; justify-self: start; align-self: start; }
+
+    .c-job__meta {
+      grid-area: meta;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 0;
+    }
+  }
+}
+
+// SEO-текст на сторінці країни: умови, документи, як отримати роботу
+.c-country-seo {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid rgba(37, 40, 44, 0.1);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--color-grey-40);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+
+  p {
+    margin: 0 0 12px;
+  }
+
+  &__title {
+    margin: 0 0 12px;
+    color: var(--text-color-btn-secondary);
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  &__subtitle {
+    margin: 20px 0 10px;
+    color: var(--text-color-btn-secondary);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  &__steps {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding-left: 20px;
+    list-style: decimal;
+
+    strong {
+      color: var(--text-color-btn-secondary);
+      font-weight: 600;
+    }
+  }
+
+  @include mobile-s {
+    padding: 20px;
+    font-size: 15px;
+    line-height: 22px;
+
+    &__title {
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+}

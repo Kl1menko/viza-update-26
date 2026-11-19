@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# невикористані файли (не для індексації)
+Disallow: /_unused/
+
+Sitemap: https://www.vizaworkagency.com/sitemap.xml

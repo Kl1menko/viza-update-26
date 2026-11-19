@@ -1,0 +1,140 @@
+<div class="c-form-switch" data-component="FormSwitch">
+  <div class="c-form-switch__choice">
+    <p class="c-form-switch__question">Who is the inquiry for?</p>
+    <div class="c-form-switch__cards">
+      <button class="c-form-switch__card m-individual" type="button" data-form-switch-choose="individual" aria-controls="modal-panel-individual">
+        <span class="c-form-switch__card-icon"><img src="../../assets/static/icons/user_chat.svg" alt="" width="28" height="28" /></span>
+        <span class="c-form-switch__card-title">For myself</span>
+        <span class="c-form-switch__card-text">I’m looking for a job or a work visa in Europe</span>
+        <span class="c-form-switch__card-arrow" aria-hidden="true">→</span>
+      </button>
+      <button class="c-form-switch__card m-partner" type="button" data-form-switch-choose="partner" aria-controls="modal-panel-partner">
+        <span class="c-form-switch__card-icon"><img src="../../assets/static/icons/business.svg" alt="" width="28" height="28" /></span>
+        <span class="c-form-switch__card-title">For agencies &amp; partners</span>
+        <span class="c-form-switch__card-text">We want to cooperate or recruit workers</span>
+        <span class="c-form-switch__card-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+
+
+  <div class="c-form-switch__panel" id="modal-panel-individual" data-form-switch-panel="individual" hidden>
+    <form name="ContactUsModal" class="c-form" autocomplete="on" method="post" novalidate>
+      <div class="c-form-group">
+        <label for="modal-name">Your Name*</label>
+        <input id="modal-name" type="text" name="name" placeholder="Enter your full name" autocomplete="name" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-phone">Phone number (WhatsApp)*</label>
+        <input id="modal-phone" type="tel" class="form-input js-phone-modal" autocomplete="tel" required />
+        <input type="hidden" id="modal-phone_e164" name="phone_e164" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-email">Email Address*</label>
+        <input id="modal-email" type="email" name="email" placeholder="example@mail.com" autocomplete="email" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-country">Your country of origin</label>
+        <input id="modal-country" type="text" name="country" placeholder="enter your country" autocomplete="country-name" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-message">Message</label>
+        <div class="c-textarea">
+          <textarea id="modal-message" name="message" placeholder="Enter your message" maxlength="500" autocomplete="off"></textarea>
+          <output class="c-textarea__counter" for="modal-message" aria-live="polite">0/500</output>
+        </div>
+      </div>
+
+      <input type="hidden" name="location" value="modal" />
+      <input type="hidden" name="url" value="" />
+      <input type="hidden" name="nospam" value="" />
+
+      <button class="button button-primary button-form js-inquire-button" type="submit">
+        Send inquiry
+      </button>
+      <p class="c-form__privacy">We process your data to reply to your request. See our <a href="../../privacy-policy.html">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="c-form-message d-none" data-form="ContactUsModal" data-form-success>
+      <div class="c-form-message__icon">
+        <img loading="lazy" decoding="async" src="../../assets/static/icons/form/success.svg" alt="Success icon" />
+      </div>
+      <div class="c-form-message__content">
+        <h2 class="c-form-message__title">Your message has been successfully sent</h2>
+        <p class="c-form-message__description">We will contact you soon</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-form-switch__panel" id="modal-panel-partner" data-form-switch-panel="partner" hidden>
+    <form name="PartnerRequestModal" class="c-form" autocomplete="on" method="post" novalidate>
+      <div class="c-form-group">
+        <label for="modal-p-contact_person">Contact Person*</label>
+        <input id="modal-p-contact_person" type="text" name="contact_person" placeholder="Enter your name and role (optional)" autocomplete="name" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-company">Company name*</label>
+        <input id="modal-p-company" type="text" name="company" placeholder="Enter your company name" autocomplete="organization" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-website">Company Website or Social Media</label>
+        <input id="modal-p-website" type="text" name="website" placeholder="Paste links to your website, Instagram, LinkedIn, etc." autocomplete="url" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-phone">Phone number (WhatsApp)*</label>
+        <input id="modal-p-phone" type="tel" class="form-input js-phone-modal" autocomplete="tel" required />
+        <input type="hidden" id="modal-p-phone_e164" name="phone_e164" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-email">Email Address*</label>
+        <input id="modal-p-email" type="email" name="email" placeholder="example@mail.com" autocomplete="email" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-countries_worked">Which countries have you worked with before?</label>
+        <input id="modal-p-countries_worked" type="text" name="countries_worked" placeholder="List the countries (e.g., Poland, Germany, Serbia)" autocomplete="off" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-countries_interested">Which countries are you interested in collaborating with?</label>
+        <input id="modal-p-countries_interested" type="text" name="countries_interested" placeholder="Specify your target destinations / countries" autocomplete="off" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="modal-p-message">Message</label>
+        <div class="c-textarea">
+          <textarea id="modal-p-message" name="message" placeholder="Enter your message" maxlength="500" autocomplete="off"></textarea>
+          <output class="c-textarea__counter" for="modal-p-message" aria-live="polite">0/500</output>
+        </div>
+      </div>
+
+      <input type="hidden" name="location" value="modal" />
+      <input type="hidden" name="url" value="" />
+      <input type="hidden" name="nospam" value="" />
+
+      <button class="button button-primary button-form js-inquire-button" type="submit">
+        Send inquiry
+      </button>
+      <p class="c-form__privacy">We process your data to reply to your request. See our <a href="../../privacy-policy.html">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="c-form-message d-none" data-form="PartnerRequestModal" data-form-success>
+      <div class="c-form-message__icon">
+        <img loading="lazy" decoding="async" src="../../assets/static/icons/form/success.svg" alt="Success icon" />
+      </div>
+      <div class="c-form-message__content">
+        <h2 class="c-form-message__title">Your message has been successfully sent</h2>
+        <p class="c-form-message__description">We will contact you soon</p>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,129 @@
+@use '../helpers' as *;
+
+// Перемикач форми зв'язку: "For myself" / "For agencies & partners"
+.c-form-switch {
+  // Крок 1: вибір. Крок 2 (.is-chosen): форма.
+  &.is-chosen &__choice { display: none; }
+
+  &__question {
+    margin: 0 0 16px;
+    color: var(--text-color-btn-secondary);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 24px;
+    border: 1px solid rgba(36, 36, 42, 0.12);
+    border-radius: 24px;
+    background: #fff;
+    color: var(--text-color-btn-secondary);
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    @include hover {
+      transform: translateY(-2px);
+      border-color: var(--border-btn-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--border-btn-primary);
+      outline-offset: 2px;
+    }
+
+    @include mobile-s {
+      padding: 20px;
+    }
+  }
+
+  &__card-icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    background: var(--color-green-10);
+
+    .m-partner & {
+      background: #fff4d1;
+    }
+  }
+
+  &__card-title {
+    padding-right: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+  }
+
+  &__card-text {
+    color: var(--color-dark-40);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__card-arrow {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border-btn-primary);
+    border-radius: 50%;
+    background: var(--bg-btn-primary);
+    color: var(--text-color-btn-primary);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+
+    .c-form-switch__card:hover & {
+      transform: translateX(3px);
+    }
+
+    @include mobile-s {
+      top: 20px;
+      right: 20px;
+    }
+  }
+
+  // захист від правил на кшталт display:block, що перебивають атрибут hidden
+  &__panel[hidden] {
+    display: none !important;
+  }
+}
+
+// Блок заявки на сторінці (.b-inquiry) має вузьку колонку під форму.
+// На ПК/планшеті крок вибору робимо ширшим, щоб картки стали в 1 ряд.
+.b-inquiry .c-form-switch__choice {
+  margin-bottom: 24px;
+
+  @include tablet-above {
+    position: relative;
+    left: 50%;
+    width: min(720px, calc(100vw - 48px));
+    transform: translateX(-50%);
+
+    .c-form-switch__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

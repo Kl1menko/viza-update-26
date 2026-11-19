@@ -1,0 +1,197 @@
+@use '../helpers' as *;
+
+:root {
+    --swiper-pagination-bullet-horizontal-gap: 6px;
+    --swiper-pagination-bullet-width: 10px;
+    --swiper-pagination-bullet-height: 4px;
+}
+
+.c-swiper {
+    position: relative;
+    z-index: 1;
+
+    .swiper-slide {
+        .row {
+            margin: 0 80px;
+        }
+
+        @include tablet {
+            .row {
+                margin: 0;
+            }
+        }
+    }
+
+    .swiper-controls {
+        display: flex;
+
+        @include tablet {
+            position: relative;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        &.m-office {
+            @include tablet-above {
+                display: none;
+            }
+        }
+
+        &.m-custom {}
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: flex;
+        width: 48px;
+        height: 48px;
+        padding: 13px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 120px;
+        background: rgba(65, 65, 81, 0.05);
+
+        &.m-custom {
+            display: none;
+        }
+
+        @include tablet {
+            position: relative;
+            margin-top: 0;
+        }
+
+        @include tablet-above {
+            &.m-team {
+                 display: none;
+            }
+        }
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        display: none;
+        font-size: 12px;
+        color: #414151;
+    }
+
+    .swiper-pagination {
+        @include tablet {
+            position: relative;
+        }
+
+        &.swiper-pagination-horizontal {
+            width: auto;
+        }
+    }
+
+    .swiper-pagination-bullets {
+        .swiper-pagination-bullet {
+            border-radius: 48px;
+            background: #CFD1D6;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--color-dark-12);
+        }
+
+        @include tablet-above {
+            display: none;
+        }
+    }
+
+    &.m-custom {
+        margin: 0;
+
+        @include tablet-above {
+            margin: 0 90px;
+        }
+    }
+}
+
+.c-outer-swiper {
+    display: none;
+
+    @include tablet-above {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0; right: 0;       /* розтягуємо на всю ширину секції */
+        transform: translateY(-50%);
+        height: 0;               /* “нульова” планка — не заважає drag */
+        z-index: 2;
+        pointer-events: none;    /* пропускаємо події до слайдів */
+      }
+
+    &-wrapper {
+        @include tablet-above {
+            position: relative;
+            width: 100%;
+            max-width: var(--container-width);
+            margin-inline: auto;
+            padding-inline: var(--container-padding-x);
+          }
+    }
+    
+    &-controls {
+        // position: relative;
+        // display: flex;
+        // justify-content: space-between;
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            position: absolute;
+            top: 0;                           /* центр планки */
+            transform: translateY(-50%);      /* рівно по середині каруселі */
+            pointer-events: auto;
+          
+            display: flex;
+            width: 48px;
+            height: 48px;
+            padding: 13px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 120px;
+            background: rgba(65, 65, 81, 0.05);
+          
+            &::after { display: none; }
+        }
+
+        .swiper-button-prev { left: 0; }
+        .swiper-button-next { right: 0; }
+    }
+}
+
+// картинки в слайдах не перетягуються мишкою — інакше свайп по карті офісу не гортав
+.c-swiper .swiper-slide img {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+// Телефон/планшет: індикатори між стрілками — в один рядок і по центру стрілок
+// (раніше стояли вище, а при 11 країнах остання смужка переносилась на 2-й рядок)
+@include tablet {
+    .c-swiper .swiper-controls {
+        gap: 12px;
+
+        .swiper-pagination.swiper-pagination-horizontal {
+            position: static;
+            display: flex;
+            flex: 1 1 auto;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            width: auto;
+            min-width: 0;
+            margin: 0;
+            transform: none;
+
+            .swiper-pagination-bullet {
+                flex-shrink: 1;
+                width: 14px;
+                margin: 0;
+            }
+        }
+    }
+}

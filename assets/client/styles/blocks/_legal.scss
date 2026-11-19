@@ -1,0 +1,181 @@
+@use "../helpers" as *;
+
+// Юридичні сторінки (Privacy Policy): читабельний текст вузькою колонкою.
+.c-legal-hero {
+  margin-bottom: 0;
+  padding-bottom: 40px;
+
+  .c-employers-hero__text {
+    margin-bottom: 0;
+  }
+}
+
+.c-legal {
+  margin-top: 40px;
+
+  &__body {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--color-dark-20);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 28px;
+
+    h2 {
+      margin: 48px 0 16px;
+      color: var(--text-primary);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 36px;
+      letter-spacing: -0.4px;
+      scroll-margin-top: 100px;
+
+      @include mobile-s {
+        margin-top: 40px;
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      color: var(--text-primary);
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 26px;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 16px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    a {
+      color: var(--text-primary);
+      text-decoration: underline;
+      text-decoration-color: var(--bg-btn-primary);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      overflow-wrap: anywhere;
+
+      &:hover {
+        color: var(--color-icon-hover);
+      }
+    }
+
+    @include mobile-s {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+
+  &__toc {
+    margin-bottom: 8px;
+    padding: 24px 28px;
+    border: 1px solid rgba(37, 40, 44, 0.1);
+    border-radius: 20px;
+    background: #fff8ea;
+
+    &-title {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    ol {
+      margin: 0;
+      columns: 2;
+      column-gap: 40px;
+
+      @include mobile {
+        columns: 1;
+      }
+    }
+
+    li {
+      break-inside: avoid;
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__table-wrap {
+    margin: 0 0 16px;
+    overflow-x: auto;
+    border: 1px solid rgba(37, 40, 44, 0.1);
+    border-radius: 16px;
+  }
+
+  &__table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 16px;
+    line-height: 24px;
+
+    th,
+    td {
+      padding: 14px 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(37, 40, 44, 0.1);
+    }
+
+    th {
+      background: #f5f6f8;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td:first-child {
+      width: 50%;
+    }
+  }
+
+  // Поля, які треба заповнити реальними реквізитами (збірка попереджає, поки вони є)
+  &__todo {
+    padding: 0 4px;
+    border-radius: 4px;
+    background: #ffe08a;
+    color: var(--text-primary);
+  }
+}
+
+// Примітка про обробку даних під кнопкою відправки форм
+.c-form__privacy {
+  margin: -8px 0 0;
+  color: var(--color-grey-40);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}

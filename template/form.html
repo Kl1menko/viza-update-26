@@ -1,0 +1,178 @@
+<section class="l-section m-inquiry" id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="b-inquiry">
+          <div class="b-inquiry-header">
+            <img loading="lazy" decoding="async" class="b-inquiry-header__image" src="../assets/static/images/inquire/avatars.svg" alt="Avatar illustration"/>
+            <h2 class="b-inquiry-header__title">
+              Ready to make your dream real? <br/>
+              Send us an inquiry!
+            </h2>
+            <p class="b-inquiry-header__subtitle">We will reply within 30m.</p>
+          </div>
+
+          <div class="c-form-switch" data-component="FormSwitch">
+  <div class="c-form-switch__choice">
+    <p class="c-form-switch__question">Who is the inquiry for?</p>
+    <div class="c-form-switch__cards">
+      <button class="c-form-switch__card m-individual" type="button" data-form-switch-choose="individual" aria-controls="home-panel-individual">
+        <span class="c-form-switch__card-icon"><img src="../assets/static/icons/user_chat.svg" alt="" width="28" height="28" /></span>
+        <span class="c-form-switch__card-title">For myself</span>
+        <span class="c-form-switch__card-text">I’m looking for a job or a work visa in Europe</span>
+        <span class="c-form-switch__card-arrow" aria-hidden="true">→</span>
+      </button>
+      <button class="c-form-switch__card m-partner" type="button" data-form-switch-choose="partner" aria-controls="home-panel-partner">
+        <span class="c-form-switch__card-icon"><img src="../assets/static/icons/business.svg" alt="" width="28" height="28" /></span>
+        <span class="c-form-switch__card-title">For agencies &amp; partners</span>
+        <span class="c-form-switch__card-text">We want to cooperate or recruit workers</span>
+        <span class="c-form-switch__card-arrow" aria-hidden="true">→</span>
+      </button>
+    </div>
+  </div>
+
+
+  <div class="c-form-switch__panel" id="home-panel-individual" data-form-switch-panel="individual" hidden>
+    <form name="ContactUs" class="c-form" autocomplete="on" method="post" novalidate>
+      <div class="c-form-group">
+        <label for="name">Your Name*</label>
+        <input id="name" type="text" name="name" placeholder="Enter your full name" autocomplete="name" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="phone">Phone number (WhatsApp)*</label>
+        <input id="phone" type="tel" class="form-input js-phone" autocomplete="tel" required />
+        <input type="hidden" id="phone_e164" name="phone_e164" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="email">Email Address*</label>
+        <input id="email" type="email" name="email" placeholder="example@mail.com" autocomplete="email" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="country">Your country of origin</label>
+        <input id="country" type="text" name="country" placeholder="enter your country" autocomplete="country-name" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="message">Message</label>
+        <div class="c-textarea">
+          <textarea id="message" name="message" placeholder="Enter your message" maxlength="500" autocomplete="off"></textarea>
+          <output class="c-textarea__counter" for="message" aria-live="polite">0/500</output>
+        </div>
+      </div>
+
+      <input type="hidden" name="location" value="home" />
+      <input type="hidden" name="url" value="" />
+      <input type="hidden" name="nospam" value="" />
+
+      <button class="button button-primary button-form js-inquire-button" type="submit">
+        Send inquiry
+      </button>
+      <p class="c-form__privacy">We process your data to reply to your request. See our <a href="../privacy-policy.html">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="c-form-message d-none" data-form="ContactUs" data-form-success>
+      <div class="c-form-message__icon">
+        <img loading="lazy" decoding="async" src="../assets/static/icons/form/success.svg" alt="Success icon" />
+      </div>
+      <div class="c-form-message__content">
+        <h2 class="c-form-message__title">Your message has been successfully sent</h2>
+        <p class="c-form-message__description">We will contact you soon</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-form-switch__panel" id="home-panel-partner" data-form-switch-panel="partner" hidden>
+    <form name="PartnerRequestHome" class="c-form" autocomplete="on" method="post" novalidate>
+      <div class="c-form-group">
+        <label for="p-contact_person">Contact Person*</label>
+        <input id="p-contact_person" type="text" name="contact_person" placeholder="Enter your name and role (optional)" autocomplete="name" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-company">Company name*</label>
+        <input id="p-company" type="text" name="company" placeholder="Enter your company name" autocomplete="organization" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-website">Company Website or Social Media</label>
+        <input id="p-website" type="text" name="website" placeholder="Paste links to your website, Instagram, LinkedIn, etc." autocomplete="url" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-phone">Phone number (WhatsApp)*</label>
+        <input id="p-phone" type="tel" class="form-input js-phone" autocomplete="tel" required />
+        <input type="hidden" id="p-phone_e164" name="phone_e164" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-email">Email Address*</label>
+        <input id="p-email" type="email" name="email" placeholder="example@mail.com" autocomplete="email" required />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-countries_worked">Which countries have you worked with before?</label>
+        <input id="p-countries_worked" type="text" name="countries_worked" placeholder="List the countries (e.g., Poland, Germany, Serbia)" autocomplete="off" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-countries_interested">Which countries are you interested in collaborating with?</label>
+        <input id="p-countries_interested" type="text" name="countries_interested" placeholder="Specify your target destinations / countries" autocomplete="off" />
+      </div>
+
+      <div class="c-form-group">
+        <label for="p-message">Message</label>
+        <div class="c-textarea">
+          <textarea id="p-message" name="message" placeholder="Enter your message" maxlength="500" autocomplete="off"></textarea>
+          <output class="c-textarea__counter" for="p-message" aria-live="polite">0/500</output>
+        </div>
+      </div>
+
+      <input type="hidden" name="location" value="home" />
+      <input type="hidden" name="url" value="" />
+      <input type="hidden" name="nospam" value="" />
+
+      <button class="button button-primary button-form js-inquire-button" type="submit">
+        Send inquiry
+      </button>
+      <p class="c-form__privacy">We process your data to reply to your request. See our <a href="../privacy-policy.html">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="c-form-message d-none" data-form="PartnerRequestHome" data-form-success>
+      <div class="c-form-message__icon">
+        <img loading="lazy" decoding="async" src="../assets/static/icons/form/success.svg" alt="Success icon" />
+      </div>
+      <div class="c-form-message__content">
+        <h2 class="c-form-message__title">Your message has been successfully sent</h2>
+        <p class="c-form-message__description">We will contact you soon</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+          <div class="b-inquiry-footer">
+            <p class="b-inquiry-footer__text">
+              +10,000 people have already used our services. You are in good hands ❤️
+            </p>
+            <div class="b-inquiry-footer__image">
+                <img loading="lazy" decoding="async" class="hero__image" src="../assets/static/images/inquire/paper.webp" alt="paper image"/>
+            </div>
+          </div>
+        </div>
+        <div class="b-inquiry-background d-none d-xs-none d-md-none">
+          <div class="cover">
+            <img loading="lazy" decoding="async" class="cover-image m-left" src="../assets/static/images/hero/left-cover.svg" alt="cover image"/>
+            <img loading="lazy" decoding="async" class="cover-image m-right" src="../assets/static/images/hero/right-cover.svg" alt="cover image"/>
+          </div>
+          <div class="paper">
+            <img loading="lazy" decoding="async" class="paper-image m-left" src="../assets/static/images/hero/left-paper.webp" alt="paper image"/>
+            <img loading="lazy" decoding="async" class="paper-image m-right" src="../assets/static/images/hero/right-paper.webp" alt="paper image"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,140 @@
+@use '../helpers' as *;
+
+// Сторінка For Employers (business.html): власна структура,
+// але кольори, форми й типографіка — як на головній.
+
+// Плашка над заголовком
+.c-eyebrow {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 6px 16px;
+  border: 1px solid rgba(37, 40, 44, 0.1);
+  border-radius: var(--border-radius-btn);
+  background: #f5f6f8;
+  color: var(--color-grey-40);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+// Перший екран
+.c-employers-hero {
+  padding-top: 80px;
+  text-align: center;
+  // м'який кремовий фон, як у футері та формі заявки
+  background: linear-gradient(180deg, #fff 0%, #fff8ea 100%);
+
+  &__title {
+    max-width: 920px;
+    margin: 0 auto 20px;
+    color: var(--text-primary);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: -0.96px;
+
+    span {
+      display: block;
+      margin-top: 8px;
+      color: var(--color-grey-40);
+      font-size: 32px;
+      line-height: 40px;
+      letter-spacing: -0.64px;
+    }
+
+    @include mobile-s {
+      font-size: 34px;
+      line-height: 40px;
+
+      span {
+        font-size: 22px;
+        line-height: 28px;
+      }
+    }
+  }
+
+  &__text {
+    max-width: 680px;
+    margin: 0 auto 40px;
+    color: var(--color-grey-40);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+
+    @include mobile-s {
+      font-size: 16px;
+      line-height: 22px;
+      margin-bottom: 32px;
+    }
+  }
+
+  @include mobile-s {
+    padding-top: 40px;
+  }
+}
+
+// "Why Companies Choose Us": 2×2 на десктопі, 1 колонка на мобільному
+.c-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+}
+
+.c-feature-card {
+  padding: 32px;
+  border: 1px solid rgba(37, 40, 44, 0.1);
+  border-radius: 24px;
+  background: #fff;
+  transition: border-color 0.2s ease;
+
+  @include hover {
+    border-color: var(--border-btn-primary);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--text-color-btn-secondary);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 26px;
+  }
+
+  &__text {
+    margin: 0;
+    color: var(--color-grey-40);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  @include mobile-s {
+    padding: 24px;
+  }
+}
+
+.c-faq.m-narrow {
+  max-width: 860px;
+  margin-inline: auto;
+}

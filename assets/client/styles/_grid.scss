@@ -1,0 +1,770 @@
+// 📦 SCSS Grid System
+@use "sass:math";
+@use "./helpers/media" as *;
+@use "./helpers/mixins" as *;
+
+// --- VARIABLES ---
+$grid-columns: 12;
+$gap-values: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem,
+);
+
+$spacers-px: (
+  0: 0px,
+  1: 4px,
+  2: 8px,
+  3: 16px,
+  4: 24px,
+  5: 32px,
+  6: 48px,
+  7: 64px,
+  8: 80px,
+  9: 96px,
+);
+
+$grid-col-options: 1 2 3 4 5 6 8 12 !default; // скільки колонок генерити
+$grid-minmax-px: (120, 160, 200, 240, 280, 320) !default; // для auto-fit/auto-fill
+$grid-span-max: $grid-columns !default; // використовує твоє $grid-columns
+
+// --- CONTAINER ---
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+// --- ROW ---
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: calc(-1 * var(--gutter-x, 1.5rem) * 0.5);
+  margin-block-start: calc(-1 * var(--gutter-y, 0) * 1);
+
+  > * {
+    padding-inline: calc(var(--gutter-x, 1.5rem) * 0.5);
+    margin-block-start: var(--gutter-y, 0);
+    flex-shrink: 0;
+    width: 100%;
+  }
+  &.m-managers-grid {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+}
+
+// --- COLUMNS ---
+.col {
+  flex: 1 0 0%;
+}
+
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    flex: 0 0 math.percentage(math.div($i, $grid-columns));
+    max-width: math.percentage(math.div($i, $grid-columns));
+  }
+}
+
+@include laptop {
+  @for $i from 1 through $grid-columns {
+    .col-lg-#{$i} {
+      flex: 0 0 math.percentage(math.div($i, $grid-columns));
+      max-width: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+@include tablet {
+  @for $i from 1 through $grid-columns {
+    .col-md-#{$i} {
+      flex: 0 0 math.percentage(math.div($i, $grid-columns));
+      max-width: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+@include mobile {
+  @for $i from 1 through $grid-columns {
+    .col-sm-#{$i} {
+      flex: 0 0 math.percentage(math.div($i, $grid-columns));
+      max-width: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+@include mobile-s {
+  @for $i from 1 through $grid-columns {
+    .col-xs-#{$i} {
+      flex: 0 0 math.percentage(math.div($i, $grid-columns));
+      max-width: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+// --- OFFSETS ---
+@for $i from 1 through ($grid-columns - 1) {
+  .offset-#{$i} {
+    margin-left: math.percentage(math.div($i, $grid-columns));
+  }
+}
+
+@include laptop {
+  @for $i from 1 through ($grid-columns - 1) {
+    .offset-lg-#{$i} {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+@include tablet {
+  @for $i from 1 through ($grid-columns - 1) {
+    .offset-md-#{$i} {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+@include mobile {
+  @for $i from 1 through ($grid-columns - 1) {
+    .offset-sm-#{$i} {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+@include mobile-s {
+  @for $i from 1 through ($grid-columns - 1) {
+    .offset-xs-#{$i} {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
+// --- ALIGNMENT ---
+.align-items-start {
+  align-items: flex-start !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+.align-items-end {
+  align-items: flex-end !important;
+}
+
+.justify-content-start {
+  justify-content: flex-start !important;
+}
+.justify-content-center {
+  justify-content: center !important;
+}
+.justify-content-end {
+  justify-content: flex-end !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.justify-content-around {
+  justify-content: space-around !important;
+}
+
+// --- ROW COLS ---
+@for $i from 1 through $grid-columns {
+  .row-cols-#{$i} > * {
+    flex: 0 0 auto;
+    width: calc(100% / #{$i});
+  }
+}
+
+// --- GAP UTILS ---
+@each $key, $val in $gap-values {
+  .g-#{$key} {
+    --gutter-x: #{$val};
+    --gutter-y: #{$val};
+  }
+
+  .gx-#{$key} {
+    --gutter-x: #{$val};
+  }
+
+  .gy-#{$key} {
+    --gutter-y: #{$val};
+  }
+}
+
+@include laptop-above {
+  // --- COLUMNS ---
+  @for $i from 1 through $grid-columns {
+    .col-xl-#{$i} {
+      flex: 0 0 math.percentage(math.div($i, $grid-columns));
+      max-width: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+
+  // --- OFFSETS ---
+  @for $i from 1 through ($grid-columns - 1) {
+    .offset-xl-#{$i} {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+
+  // --- ROW COLS ---
+  @for $i from 1 through $grid-columns {
+    .row-cols-xl-#{$i} > * {
+      flex: 0 0 auto;
+      width: calc(100% / #{$i});
+    }
+  }
+}
+
+// --- ORDER UTILS ---
+@for $i from 0 through $grid-columns {
+  .order-#{$i} {
+    order: $i !important;
+  }
+}
+
+.order-first {
+  order: -1 !important;
+}
+
+.order-last {
+  order: 9999 !important;
+}
+
+@include mobile-s {
+  @for $i from 0 through $grid-columns {
+    .order-xs-#{$i} {
+      order: $i !important;
+    }
+  }
+  .order-xs-first {
+    order: -1 !important;
+  }
+  .order-xs-last {
+    order: 9999 !important;
+  }
+}
+
+@include mobile {
+  @for $i from 0 through $grid-columns {
+    .order-sm-#{$i} {
+      order: $i !important;
+    }
+  }
+  .order-sm-first {
+    order: -1 !important;
+  }
+  .order-sm-last {
+    order: 9999 !important;
+  }
+}
+
+@include tablet {
+  @for $i from 0 through $grid-columns {
+    .order-md-#{$i} {
+      order: $i !important;
+    }
+  }
+  .order-md-first {
+    order: -1 !important;
+  }
+  .order-md-last {
+    order: 9999 !important;
+  }
+}
+
+@include laptop {
+  @for $i from 0 through $grid-columns {
+    .order-lg-#{$i} {
+      order: $i !important;
+    }
+  }
+  .order-lg-first {
+    order: -1 !important;
+  }
+  .order-lg-last {
+    order: 9999 !important;
+  }
+}
+
+@include laptop-above {
+  @for $i from 0 through $grid-columns {
+    .order-xl-#{$i} {
+      order: $i !important;
+    }
+  }
+  .order-xl-first {
+    order: -1 !important;
+  }
+  .order-xl-last {
+    order: 9999 !important;
+  }
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+@include mobile-s {
+  .w-xs-100 {
+    width: 100% !important;
+  }
+}
+
+@include mobile {
+  .w-sm-100 {
+    width: 100% !important;
+  }
+}
+
+@include tablet {
+  .w-md-100 {
+    width: 100% !important;
+  }
+}
+
+@include laptop {
+  .w-lg-100 {
+    width: 100% !important;
+  }
+}
+
+@include laptop-above {
+  .w-xl-100 {
+    width: 100% !important;
+  }
+}
+
+
+.d-none {
+  display: none !important;
+}
+
+@include mobile-s {
+  .d-xs-none {
+    display: none !important;
+  }
+}
+
+@include mobile {
+  .d-sm-none {
+    display: none !important;
+  }
+}
+
+@include tablet {
+  .d-md-none {
+    display: none !important;
+  }
+}
+
+@include laptop {
+  .d-lg-none {
+    display: none !important;
+  }
+}
+
+@include laptop-above {
+  .d-xl-none {
+    display: none !important;
+  }
+}
+
+// --- DISPLAY FLEX ---
+.d-flex {
+  display: flex !important;
+}
+
+@include mobile-s {
+  .d-xs-flex {
+    display: flex !important;
+  }
+}
+
+@include mobile {
+  .d-sm-flex {
+    display: flex !important;
+  }
+}
+
+@include tablet {
+  .d-md-flex {
+    display: flex !important;
+  }
+}
+
+@include laptop {
+  .d-lg-flex {
+    display: flex !important;
+  }
+}
+
+@include laptop-above {
+  .d-xl-flex {
+    display: flex !important;
+  }
+}
+
+// --- DISPLAY BLOCK ---
+.d-block {
+  display: block !important;
+}
+
+@include mobile-s {
+  .d-xs-block {
+    display: block !important;
+  }
+}
+
+@include mobile {
+  .d-sm-block {
+    display: block !important;
+  }
+}
+
+@include tablet {
+  .d-md-block {
+    display: block !important;
+  }
+}
+
+@include laptop {
+  .d-lg-block {
+    display: block !important;
+  }
+}
+
+@include laptop-above {
+  .d-xl-block {
+    display: block !important;
+  }
+}
+
+// --- DISPLAY GRID ---
+.d-grid {
+  display: grid !important;
+}
+
+@include mobile-s {
+  .d-xs-grid {
+    display: grid !important;
+  }
+}
+
+@include mobile {
+  .d-sm-grid {
+    display: grid !important;
+  }
+}
+
+@include tablet {
+  .d-md-grid {
+    display: grid !important;
+  }
+}
+
+@include laptop {
+  .d-lg-grid {
+    display: grid !important;
+  }
+}
+
+@include laptop-above {
+  .d-xl-grid {
+    display: grid !important;
+  }
+}
+
+@each $key, $val in $spacers-px {
+  // Margin
+  .m-#{$key}  { margin:        $val !important; }
+  .mt-#{$key} { margin-top:    $val !important; }
+  .mb-#{$key} { margin-bottom: $val !important; }
+  .ms-#{$key} { margin-left:   $val !important; }
+  .me-#{$key} { margin-right:  $val !important; }
+  .mx-#{$key} {
+    margin-left:  $val !important;
+    margin-right: $val !important;
+  }
+  .my-#{$key} {
+    margin-top:    $val !important;
+    margin-bottom: $val !important;
+  }
+
+  // Padding
+  .p-#{$key}  { padding:        $val !important; }
+  .pt-#{$key} { padding-top:    $val !important; }
+  .pb-#{$key} { padding-bottom: $val !important; }
+  .ps-#{$key} { padding-left:   $val !important; }
+  .pe-#{$key} { padding-right:  $val !important; }
+  .px-#{$key} {
+    padding-left:  $val !important;
+    padding-right: $val !important;
+  }
+  .py-#{$key} {
+    padding-top:    $val !important;
+    padding-bottom: $val !important;
+  }
+}
+
+@include mobile-s {
+  @include generate-spacing(xs);
+}
+
+@include mobile {
+  @include generate-spacing(sm);
+}
+
+@include tablet {
+  @include generate-spacing(md);
+}
+
+@include laptop {
+  @include generate-spacing(lg);
+}
+
+@include laptop-above {
+  @include generate-spacing(xl);
+}
+
+// --- Z-INDEX UTILS ---
+@for $i from 0 through 10 {
+  $z: $i * 10;
+  .z-#{$z} {
+    z-index: #{$z} !important;
+  }
+}
+
+
+.justify-items-start   { justify-items: start !important; }
+.justify-items-center  { justify-items: center !important; }
+.justify-items-end     { justify-items: end !important; }
+.justify-items-stretch { justify-items: stretch !important; }
+
+// Адаптивні варіанти
+@include mobile-s {
+  .justify-items-xs-start   { justify-items: start !important; }
+  .justify-items-xs-center  { justify-items: center !important; }
+  .justify-items-xs-end     { justify-items: end !important; }
+  .justify-items-xs-stretch { justify-items: stretch !important; }
+}
+
+@include mobile {
+  .justify-items-sm-start   { justify-items: start !important; }
+  .justify-items-sm-center  { justify-items: center !important; }
+  .justify-items-sm-end     { justify-items: end !important; }
+  .justify-items-sm-stretch { justify-items: stretch !important; }
+}
+
+@include tablet {
+  .justify-items-md-start   { justify-items: start !important; }
+  .justify-items-md-center  { justify-items: center !important; }
+  .justify-items-md-end     { justify-items: end !important; }
+  .justify-items-md-stretch { justify-items: stretch !important; }
+}
+
+@include laptop {
+  .justify-items-lg-start   { justify-items: start !important; }
+  .justify-items-lg-center  { justify-items: center !important; }
+  .justify-items-lg-end     { justify-items: end !important; }
+  .justify-items-lg-stretch { justify-items: stretch !important; }
+}
+
+@include laptop-above {
+  .justify-items-xl-start   { justify-items: start !important; }
+  .justify-items-xl-center  { justify-items: center !important; }
+  .justify-items-xl-end     { justify-items: end !important; }
+  .justify-items-xl-stretch { justify-items: stretch !important; }
+}
+
+// --- GAP X / Y / ALL (з адаптивом) ---
+@each $key, $val in $gap-values {
+  // базові (без брейкпоінтів)
+  .gap-x-#{$key} { column-gap: #{$val} !important; }
+  .gap-y-#{$key} { row-gap:    #{$val} !important; }
+  .gap-#{$key}   { gap:        #{$val} !important; }
+}
+
+// --- xs ---
+@include mobile-s {
+  @each $key, $val in $gap-values {
+    .gap-xs-x-#{$key} { column-gap: #{$val} !important; }
+    .gap-xs-y-#{$key} { row-gap:    #{$val} !important; }
+    .gap-xs-#{$key}   { gap:        #{$val} !important; }
+  }
+}
+
+// --- sm ---
+@include mobile {
+  @each $key, $val in $gap-values {
+    .gap-sm-x-#{$key} { column-gap: #{$val} !important; }
+    .gap-sm-y-#{$key} { row-gap:    #{$val} !important; }
+    .gap-sm-#{$key}   { gap:        #{$val} !important; }
+  }
+}
+
+// --- md ---
+@include tablet {
+  @each $key, $val in $gap-values {
+    .gap-md-x-#{$key} { column-gap: #{$val} !important; }
+    .gap-md-y-#{$key} { row-gap:    #{$val} !important; }
+    .gap-md-#{$key}   { gap:        #{$val} !important; }
+  }
+}
+
+// --- lg ---
+@include laptop {
+  @each $key, $val in $gap-values {
+    .gap-lg-x-#{$key} { column-gap: #{$val} !important; }
+    .gap-lg-y-#{$key} { row-gap:    #{$val} !important; }
+    .gap-lg-#{$key}   { gap:        #{$val} !important; }
+  }
+}
+
+// --- xl ---
+@include laptop-above {
+  @each $key, $val in $gap-values {
+    .gap-xl-x-#{$key} { column-gap: #{$val} !important; }
+    .gap-xl-y-#{$key} { row-gap:    #{$val} !important; }
+    .gap-xl-#{$key}   { gap:        #{$val} !important; }
+  }
+}
+
+.grid {
+  display: grid;
+  // за замовчуванням підхоплює твої gap-утиліти (gap, gx/gy)
+  gap: var(--gutter-y, 0) var(--gutter-x, 1.5rem);
+
+  // базові вирівнювання (можеш переважити утилітами нижче)
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+/* ===== Колонки: фіксована кількість ===== */
+@each $n in $grid-col-options {
+  .grid-cols-#{$n} { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+}
+
+/* ===== Автоматичні колонки (auto-fit / auto-fill) ===== */
+@each $w in $grid-minmax-px {
+  .grid-cols-fit-#{$w}  { grid-template-columns: repeat(auto-fit,  minmax(#{$w}px, 1fr)); }
+  .grid-cols-fill-#{$w} { grid-template-columns: repeat(auto-fill, minmax(#{$w}px, 1fr)); }
+}
+
+/* ===== Ряди ===== */
+.grid-rows-auto { grid-auto-rows: auto; }
+@each $h in $grid-minmax-px {
+  .grid-rows-#{$h} { grid-auto-rows: #{$h}px; }
+}
+
+/* ===== Span для елементів ===== */
+@for $i from 1 through $grid-span-max {
+  .col-span-#{$i} { grid-column: span #{$i} / span #{$i}; }
+  .row-span-#{$i} { grid-row:    span #{$i} / span #{$i}; }
+}
+.col-span-full { grid-column: 1 / -1; }
+.row-span-full { grid-row:    1 / -1; }
+
+/* ===== Вирівнювання саме для grid ===== */
+.place-items-start   { place-items: start; }
+.place-items-center  { place-items: center; }
+.place-items-end     { place-items: end; }
+.place-items-stretch { place-items: stretch; }
+
+.place-content-start   { place-content: start; }
+.place-content-center  { place-content: center; }
+.place-content-end     { place-content: end; }
+.place-content-between { place-content: space-between; }
+.place-content-around  { place-content: space-around; }
+.place-content-evenly  { place-content: space-evenly; }
+
+/* ===== Грід-авто-потік ===== */
+.grid-flow-row    { grid-auto-flow: row; }
+.grid-flow-col    { grid-auto-flow: column; }
+.grid-flow-dense  { grid-auto-flow: dense; }
+.grid-flow-row-dense { grid-auto-flow: row dense; }
+.grid-flow-col-dense { grid-auto-flow: column dense; }
+
+/* ===== Адаптиви (xs / sm / md / lg / xl) ===== */
+/* xs */
+@include mobile-s {
+  @each $n in $grid-col-options {
+    .grid-cols-xs-#{$n} { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+  }
+  @each $w in $grid-minmax-px {
+    .grid-cols-xs-fit-#{$w}  { grid-template-columns: repeat(auto-fit,  minmax(#{$w}px, 1fr)); }
+    .grid-cols-xs-fill-#{$w} { grid-template-columns: repeat(auto-fill, minmax(#{$w}px, 1fr)); }
+  }
+  @for $i from 1 through $grid-span-max {
+    .col-xs-span-#{$i} { grid-column: span #{$i} / span #{$i}; }
+    .row-xs-span-#{$i} { grid-row:    span #{$i} / span #{$i}; }
+  }
+}
+
+/* sm */
+@include mobile {
+  @each $n in $grid-col-options {
+    .grid-cols-sm-#{$n} { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+  }
+  @each $w in $grid-minmax-px {
+    .grid-cols-sm-fit-#{$w}  { grid-template-columns: repeat(auto-fit,  minmax(#{$w}px, 1fr)); }
+    .grid-cols-sm-fill-#{$w} { grid-template-columns: repeat(auto-fill, minmax(#{$w}px, 1fr)); }
+  }
+  @for $i from 1 through $grid-span-max {
+    .col-sm-span-#{$i} { grid-column: span #{$i} / span #{$i}; }
+    .row-sm-span-#{$i} { grid-row:    span #{$i} / span #{$i}; }
+  }
+}
+
+/* md */
+@include tablet-above {
+  @each $n in $grid-col-options {
+    .grid-cols-md-#{$n} { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+  }
+  @each $w in $grid-minmax-px {
+    .grid-cols-md-fit-#{$w}  { grid-template-columns: repeat(auto-fit,  minmax(#{$w}px, 1fr)); }
+    .grid-cols-md-fill-#{$w} { grid-template-columns: repeat(auto-fill, minmax(#{$w}px, 1fr)); }
+  }
+  @for $i from 1 through $grid-span-max {
+    .col-md-span-#{$i} { grid-column: span #{$i} / span #{$i}; }
+    .row-md-span-#{$i} { grid-row:    span #{$i} / span #{$i}; }
+  }
+}
+
+
+/* lg */
+@include laptop {
+  @each $n in $grid-col-options {
+    .grid-cols-lg-#{$n} { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+  }
+  @each $w in $grid-minmax-px {
+    .grid-cols-lg-fit-#{$w}  { grid-template-columns: repeat(auto-fit,  minmax(#{$w}px, 1fr)); }
+    .grid-cols-lg-fill-#{$w} { grid-template-columns: repeat(auto-fill, minmax(#{$w}px, 1fr)); }
+  }
+  @for $i from 1 through $grid-span-max {
+    .col-lg-span-#{$i} { grid-column: span #{$i} / span #{$i}; }
+    .row-lg-span-#{$i} { grid-row:    span #{$i} / span #{$i}; }
+  }
+}
+
+/* xl */
+@include laptop-above {
+  @each $n in $grid-col-options {
+    .grid-cols-xl-#{$n} { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+  }
+  @each $w in $grid-minmax-px {
+    .grid-cols-xl-fit-#{$w}  { grid-template-columns: repeat(auto-fit,  minmax(#{$w}px, 1fr)); }
+    .grid-cols-xl-fill-#{$w} { grid-template-columns: repeat(auto-fill, minmax(#{$w}px, 1fr)); }
+  }
+  @for $i from 1 through $grid-span-max {
+    .col-xl-span-#{$i} { grid-column: span #{$i} / span #{$i}; }
+    .row-xl-span-#{$i} { grid-row:    span #{$i} / span #{$i}; }
+  }
+}
+

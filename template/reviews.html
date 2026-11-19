@@ -1,0 +1,108 @@
+<section class="l-section">
+  <div class="container">
+    <div class="l-section__header m-review" id="reviews">Reviews</div>
+
+    <div class="c-video-reviews">
+      <figure class="c-video-review" data-component="VideoReview">
+        <div class="c-video-review__frame">
+          <!-- preload="none": відео не вантажиться, доки не натиснуть Play; обкладинка (data-poster) — коли блок біля екрана -->
+          <video class="c-video-review__video" preload="none" playsinline width="352" height="640"
+            data-poster="../assets/static/images/reviews/video-1-poster.webp">
+            <source src="../assets/static/videos/review-1.mp4" type="video/mp4" />
+          </video>
+          <button class="c-video-review__play" type="button" aria-label="Play video review 1"
+            data-label-play="Play video review 1" data-label-resume="Resume video review 1">
+            <span class="c-video-review__play-icon" aria-hidden="true"></span>
+          </button>
+          <button class="c-video-review__close" type="button" aria-label="Close video review 1"></button>
+        </div>
+      </figure>
+      <figure class="c-video-review" data-component="VideoReview">
+        <div class="c-video-review__frame">
+          <!-- preload="none": відео не вантажиться, доки не натиснуть Play; обкладинка (data-poster) — коли блок біля екрана -->
+          <video class="c-video-review__video" preload="none" playsinline width="352" height="640"
+            data-poster="../assets/static/images/reviews/video-2-poster.webp">
+            <source src="../assets/static/videos/review-2.mp4" type="video/mp4" />
+          </video>
+          <button class="c-video-review__play" type="button" aria-label="Play video review 2"
+            data-label-play="Play video review 2" data-label-resume="Resume video review 2">
+            <span class="c-video-review__play-icon" aria-hidden="true"></span>
+          </button>
+          <button class="c-video-review__close" type="button" aria-label="Close video review 2"></button>
+        </div>
+      </figure>
+    </div>
+
+    <div class="c-video-reviews__actions">
+      <button class="button button-secondary" type="button" data-gallery-open="visa-gallery">See photos of ready visas</button>
+    </div>
+  </div>
+
+  <!--
+    Галерея фото готових віз: assets/static/images/visas/*.webp.
+    Перед додаванням нових фото обов'язково приховуйте персональні дані (імена, дати народження, номери, рядок MRZ).
+  -->
+  <dialog class="c-visa-gallery" id="visa-gallery" aria-label="Photos of ready visas" data-component="VisaGallery">
+    <div class="c-visa-gallery__inner">
+      <div class="c-visa-gallery__header">
+        <p class="c-visa-gallery__title">Photos of ready visas</p>
+        <span class="c-visa-gallery__counter" aria-live="polite"></span>
+        <button class="c-visa-gallery__close" type="button" aria-label="Close gallery" data-gallery-close></button>
+      </div>
+      <div class="c-visa-gallery__swiper swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-poland-1.webp" alt="Poland: national work visa (type D) — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Poland: national work visa (type D)</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-czechia-1.webp" alt="Czech Republic: work visa — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Czech Republic: work visa</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-czechia-2.webp" alt="Czech Republic: work visa — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Czech Republic: work visa</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-spain-1.webp" alt="Spain: residence and work permit — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Spain: residence and work permit</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-armenia-1.webp" alt="Armenia: work e-visa — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Armenia: work e-visa</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-armenia-2.webp" alt="Armenia: work e-visa — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Armenia: work e-visa</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-armenia-3.webp" alt="Armenia: work e-visa — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Armenia: work e-visa</figcaption>
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="c-visa-gallery__slide">
+              <img class="c-visa-gallery__image" src="../assets/static/images/visas/visa-armenia-4.webp" alt="Armenia: work e-visa — ready document of our client (personal data hidden)" loading="lazy" decoding="async" />
+              <figcaption class="c-visa-gallery__caption">Armenia: work e-visa</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="c-visa-gallery__nav m-prev" type="button" aria-label="Previous photo"></button>
+        <button class="c-visa-gallery__nav m-next" type="button" aria-label="Next photo"></button>
+      </div>
+    </div>
+  </dialog>
+</section>

@@ -1,0 +1,41 @@
+.top-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+    width: 48px;
+    height: 48px;
+    padding: 14px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border-radius: 120px;
+    background: #1B1B24;
+    box-shadow: 0 8px 23.8px 0 rgba(28, 20, 11, 0.09);
+    z-index: 25;
+    border: 0;
+    outline: 0;
+    background-image: url('../../static/icons/arrow-up.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    &:hover {
+        background: #2A2A34;
+        background-image: url('../../static/icons/arrow-up.svg');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+    }
+
+    &.m-active {
+        display: flex;
+    }
+}
+
+// поступається місцем стрілкам слайдерів унизу екрана (див. main.js)
+.top-button.m-yield {
+    @media (width <= 1023.98px) {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

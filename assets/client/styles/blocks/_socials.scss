@@ -1,0 +1,51 @@
+@use '../helpers' as *;
+
+.socials {
+  &__list {
+    display: flex;
+    column-gap: 8px;
+
+    @include mobile-s {
+      column-gap: 16px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    padding: 6px;
+  }
+
+  &__link {
+    color: var(--color-icon);
+
+    @include hover {
+      color: var(--color-icon-hover);
+      transform: scale(1.05);
+    }
+
+    &.m-secondary {
+      color: var(--color-icon-secondary);
+
+      @include hover {
+        color: var(--color-icon-secondary-hover);
+      }
+    }
+  }
+}
+// Іконки соцмереж: файл SVG як маска, колір — currentColor посилання,
+// тож працюють і кольори .m-secondary, і ховер.
+.socials__icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  -webkit-mask: center / contain no-repeat;
+  mask: center / contain no-repeat;
+
+  @each $name in tiktok, facebook, linkedin, instagram {
+    &--#{$name} {
+      -webkit-mask-image: url("../../static/icons/socials/#{$name}.svg");
+      mask-image: url("../../static/icons/socials/#{$name}.svg");
+    }
+  }
+}
