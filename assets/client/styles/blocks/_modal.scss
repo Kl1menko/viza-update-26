@@ -55,6 +55,33 @@ body.is-locked {
             // зверху місце під плаваючу кнопку закриття, щоб вона не лягала на заголовок
             margin: calc(env(safe-area-inset-top, 0px) + 80px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px);
             padding: 24px 20px;
+
+            // картка не вища за екран: заголовок на місці, форма гортається всередині
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 104px);
+            max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 104px);
+            padding-bottom: 0;
+        }
+    }
+
+    @include mobile {
+        &-header {
+            flex-shrink: 0;
+            margin-bottom: 0;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(37, 40, 44, 0.1);
+        }
+
+        &-content {
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            // поля з рамкою фокусу не обрізаються краєм прокрутки
+            margin: 0 -20px;
+            padding: 20px 20px 24px;
         }
     }
 

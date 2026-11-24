@@ -52,12 +52,6 @@
   padding: 0;
   list-style: none;
 
-  // у каруселі — 2 колонки на ПК
-  &.m-compact {
-    @include tablet-above {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
 }
 
 .c-job {
@@ -65,10 +59,6 @@
   border: 1px solid rgba(37, 40, 44, 0.1);
   border-radius: 16px;
   background: #fff;
-
-  &.m-compact {
-    padding: 16px;
-  }
 
   // іконка завжди вирівняна по верху тексту — однаково в усіх картках,
   // незалежно від того, в скільки рядків назва
@@ -138,11 +128,6 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
-
-    .m-compact & {
-      font-size: 13px;
-      line-height: 17px;
-    }
   }
 
   &__chip-label {
@@ -184,34 +169,139 @@
   }
 }
 
-// Компактна картка в каруселі: графік і житло — короткими рядками без плашок
+// Карусель на головній: вакансії рядками (іконка, назва, зарплата),
+// опис, графік, житло і переваги розкриваються по тапу (<details>).
+// Однаковий вигляд незалежно від кількості вакансій у країні.
+.c-job-list.m-compact {
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgba(37, 40, 44, 0.1);
+  border-radius: 16px;
+  background: #fff;
+}
+
 .c-job.m-compact {
-  .c-job__meta {
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+
+  & + & {
+    border-top: 1px solid rgba(37, 40, 44, 0.1);
   }
 
-  .c-job__chip {
-    display: block;
-    padding: 0;
-    background: none;
-    color: var(--color-grey-40);
+  .c-job__head {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 32px;
+    grid-template-areas:
+      "icon title toggle"
+      "icon salary toggle";
+    gap: 0 12px;
+    align-items: center;
+    padding: 14px 16px;
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    @include hover {
+      background: var(--color-grey-20);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-green);
+      outline-offset: -2px;
+    }
   }
 
-  .c-job__chip-label {
-    display: inline;
-    margin-right: 4px;
-    font-size: 13px;
-    text-transform: none;
+  .c-job__icon {
+    grid-area: icon;
+  }
 
-    &::after {
-      content: ':';
+  .c-job__title {
+    grid-area: title;
+    align-self: end;
+  }
+
+  .c-job__salary {
+    grid-area: salary;
+    align-self: start;
+  }
+
+  // кружечок зі стрілкою: вниз — згорнуто, вгору — розкрито
+  .c-job__toggle {
+    grid-area: toggle;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-grey-20);
+    transition: background-color 0.2s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--text-color-btn-secondary);
+      border-bottom: 2px solid var(--text-color-btn-secondary);
+      transform: translate(-50%, -70%) rotate(45deg);
+      transition: transform 0.2s;
+    }
+  }
+
+  .c-job__details[open] {
+    .c-job__toggle {
+      background: var(--color-green-10);
+
+      &::before {
+        border-color: var(--color-green);
+        transform: translate(-50%, -30%) rotate(-135deg);
+      }
+    }
+  }
+
+  // вміст під назвою, на одній лінії з текстом заголовка
+  .c-job__body {
+    padding: 0 16px 16px 76px;
+
+    @include mobile-s {
+      padding-left: 16px;
+    }
+  }
+
+  .c-job__text {
+    margin-top: 0;
+  }
+
+  // кнопка відгуку: відкриває модалку з вибором форми (для себе / для партнерів)
+  .c-job__apply {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  // телефон: графік і житло — дві плашки в один ряд
+  @include mobile {
+    .c-job__meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 }
 
-// Кнопка "See all N vacancies" під вакансіями в каруселі
+// Кнопка "More about work in ..." під вакансіями в каруселі
 .c-country-more {
   display: inline-flex;
   justify-content: center;
@@ -219,13 +309,6 @@
 
   @include mobile {
     width: 100%;
-  }
-}
-
-// Телефон: у каруселі показуємо до 2 вакансій на програму, решта — на сторінці країни
-@include mobile {
-  .c-job-list.m-compact > .c-job:nth-child(n + 3) {
-    display: none;
   }
 }
 

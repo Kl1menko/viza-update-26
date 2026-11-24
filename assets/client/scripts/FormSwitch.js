@@ -44,8 +44,11 @@ class FormSwitch {
       if (!panel.hasAttribute('tabindex')) panel.setAttribute('tabindex', '-1');
       panel.focus({ preventScroll: true });
       const modal = panel.closest('[data-component="Modal"]');
-      if (modal) modal.scrollTo({ top: 0, behavior: 'smooth' }); // у модалці — з заголовка
-      else panel.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      if (modal) {
+        // у модалці — з заголовка; на телефоні гортається внутрішній блок .modal-content
+        modal.scrollTo({ top: 0, behavior: 'smooth' });
+        modal.querySelector('.modal-content')?.scrollTo({ top: 0, behavior: 'smooth' });
+      } else panel.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
   }
 

@@ -64,7 +64,16 @@ ready().then(async () => {
         if (quickFilter?.cache?.links?.length && ![...quickFilter.cache.links].some(l => l.classList.contains(quickFilter.selector.activeClass))) {
             quickFilter.setActive(quickFilter.cache.links[0]);
         }
-        
+
+        // вакансії в каруселі: на телефоні всі згорнуті (в HTML без open),
+        // на ПК перша вакансія кожної країни відкрита. До ініціалізації Swiper,
+        // щоб autoHeight одразу порахував правильну висоту
+        if (window.matchMedia('(min-width: 768px)').matches) {
+          document.querySelectorAll('[data-carousel="CountryCarousel"] .swiper-slide').forEach((slide) => {
+            slide.querySelector('.c-job__details')?.setAttribute('open', '');
+          });
+        }
+
             let carousel = new Carousel('[data-carousel="CountryCarousel"]', {
       slidesPerView: 1,
       spaceBetween: 10,
@@ -108,6 +117,12 @@ ready().then(async () => {
         }
         });
         
+        // вакансія розкрилась/згорнулась — перерахувати висоту слайда (autoHeight).
+        // toggle не спливає, тому слухаємо у фазі захоплення
+        carousel.element.addEventListener("toggle", () => {
+          carousel.swiper?.updateAutoHeight(200);
+        }, true);
+
         // 🔁 Filter → Slide
         quickFilter.element.addEventListener("filter:change", (e) => {
           carousel.slideToById(e.detail.id);
