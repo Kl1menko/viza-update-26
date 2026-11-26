@@ -4,6 +4,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/opened-work/lithuania/", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

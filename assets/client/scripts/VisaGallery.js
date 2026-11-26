@@ -2,6 +2,7 @@
  * Галерея фото готових віз у нативному <dialog>.
  * Відкривається кнопками [data-gallery-open="<id діалогу>"], закривається
  * хрестиком, клавішею Esc (вбудовано в <dialog>) або кліком по фону.
+ * data-gallery-index="<n>" на кнопці відкриває галерею одразу на слайді n (з нуля).
  */
 class VisaGallery {
   constructor(dialog) {
@@ -32,10 +33,13 @@ class VisaGallery {
     this.dialog.showModal();
     document.documentElement.classList.add('is-lock');
 
+    const index = Number(opener?.dataset.galleryIndex) || 0;
+
     // Swiper ініціалізуємо при першому відкритті: у прихованому діалозі він не знає розмірів
     if (!this.swiper && window.Swiper) {
       this.swiper = new window.Swiper(this.swiperElement, {
         slidesPerView: 1,
+        initialSlide: index,
         spaceBetween: 16,
         keyboard: { enabled: true },
         navigation: {
@@ -47,8 +51,9 @@ class VisaGallery {
           slideChange: (swiper) => this.updateCounter(swiper),
         },
       });
-    } else {
-      this.swiper?.update();
+    } else if (this.swiper) {
+      this.swiper.update();
+      this.swiper.slideTo(index, 0);
     }
   }
 

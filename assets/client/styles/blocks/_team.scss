@@ -78,7 +78,9 @@
     }
 
     // Розкрито
+    // display: block — Safari не перераховує висоту, якщо лише зняти -webkit-line-clamp
     .toggle:checked ~ .manager-description__text {
+      display: block;
       max-height: none;
       -webkit-line-clamp: unset;
     }

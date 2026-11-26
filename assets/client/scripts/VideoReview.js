@@ -21,7 +21,7 @@ class VideoReview {
     this.bindEvents();
   }
 
-  // Обкладинку ставимо, лише коли блок наближається до екрана (запас 300px),
+  // Обкладинку ставимо, лише коли блок наближається до екрана (запас 300px, і збоку — для слайдів поза екраном),
   // щоб не вантажити її разом зі сторінкою. Саме відео — preload="none".
   lazyPoster() {
     const poster = this.video.dataset.poster;
@@ -33,7 +33,7 @@ class VideoReview {
         set();
         observer.disconnect();
       }
-    }, { rootMargin: '300px 0px' });
+    }, { rootMargin: '300px' });
     observer.observe(this.element);
   }
 

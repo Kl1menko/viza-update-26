@@ -271,6 +271,37 @@ ready().then(async () => {
     document.querySelectorAll('[data-component="VideoReview"]').forEach((element) => {
       new VideoReview(element);
     });
+
+    // Слайдер відгуків: усі картки однакового розміру в один рядок
+    const reviewsSlider = document.querySelector('[data-component="ReviewsSlider"]');
+    if (reviewsSlider && window.Swiper) {
+      const controls = reviewsSlider.nextElementSibling;
+      new window.Swiper(reviewsSlider, {
+        slidesPerView: 1.25,
+        spaceBetween: 16,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        navigation: {
+          prevEl: controls?.querySelector('.c-reviews-slider__nav.m-prev'),
+          nextEl: controls?.querySelector('.c-reviews-slider__nav.m-next'),
+        },
+        pagination: { el: controls?.querySelector('.c-reviews-slider__pagination'), clickable: true },
+        breakpoints: {
+          500:  { slidesPerView: 2.2, spaceBetween: 16 },
+          768:  { slidesPerView: 3,   spaceBetween: 24 },
+          1025: { slidesPerView: 4,   spaceBetween: 24 },
+        },
+        on: {
+          // відео, що виїхало за межі слайдера, ставимо на паузу
+          slideChangeTransitionEnd: (swiper) => {
+            swiper.slides.forEach((slide) => {
+              if (slide.classList.contains('swiper-slide-visible')) return;
+              slide.querySelector('video')?.pause();
+            });
+          },
+        },
+      });
+    }
     document.querySelectorAll('[data-component="VisaGallery"]').forEach((element) => {
       new VisaGallery(element);
     });
