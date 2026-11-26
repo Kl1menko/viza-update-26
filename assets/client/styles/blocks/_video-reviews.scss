@@ -23,17 +23,37 @@
 
   // подвійний клас — щоб перебити глобальне button[aria-label] і стилі Swiper
   &__nav.c-reviews-slider__nav {
-    display: flex;
+    position: relative;
     flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    padding: 13px;
-    border: 0;
-    border-radius: 120px;
-    background: rgba(65, 65, 81, 0.05);
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid var(--border-btn-secondary);
+    border-radius: 50%;
+    background: #fff;
     cursor: pointer;
+    transition: border-color 0.2s ease;
+
+    // стрілка (як у галереї фото віз)
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 9px;
+      border-top: 2px solid var(--text-color-btn-secondary);
+      border-right: 2px solid var(--text-color-btn-secondary);
+      transform: translate(-65%, -50%) rotate(45deg);
+    }
+
+    &.m-prev::before {
+      transform: translate(-35%, -50%) rotate(-135deg);
+    }
+
+    @include hover {
+      border-color: var(--border-btn-secondary-hover);
+    }
 
     &.swiper-button-disabled {
       opacity: 0.35;
@@ -52,6 +72,7 @@
     justify-content: center;
     gap: 6px;
     width: auto;
+    max-width: fit-content; // Swiper ставить width: 100% — тоді стрілки розлітались по краях
     transform: none;
 
     .swiper-pagination-bullet {
